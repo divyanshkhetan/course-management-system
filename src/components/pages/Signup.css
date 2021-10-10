@@ -1,0 +1,32 @@
+
+.container-y{
+    min-width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2rem;
+    text-align: center;
+    align-items: center;
+}
+
+.lock-icon-background{
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    background: #9c27b0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heading{
+    font-size: 2rem;
+    margin: 0.5rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.submit{
+    min-height: 3rem;
+    width: 100%;
+}
