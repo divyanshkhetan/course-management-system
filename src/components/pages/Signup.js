@@ -5,8 +5,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     return (
@@ -17,6 +17,22 @@ const Login = () => {
             <div className="heading">Login</div>
 
             <form style={{ minWidth: '25vw', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div>
+                    <TextField id="fname"
+                        label="First Name"
+                        varient="outlined"
+                        type="text"
+                        required
+                        style={{margin: "0px 0.5rem 0px 0px"}}
+                    />
+                    <TextField id="lname"
+                        label="Last Name"
+                        varient="outlined"
+                        type="text"
+                        required
+                        style={{margin: "0px 0px 0px 0.5rem"}}
+                    />
+                </div>
                 <TextField id="email"
                     label="Email Address"
                     variant="outlined"
@@ -34,7 +50,8 @@ const Login = () => {
                     <FormControlLabel value="student" control={<Radio />} label="Student" />
                     <FormControlLabel value="faculty" control={<Radio />} label="Faculty" />
                 </RadioGroup>
-            <Button type="submit" className="submit" variant="contained">Login</Button>
+            <Button type="submit" className="submit" variant="contained">Sign Up</Button>
+            <Link to="/login" style={{margin: '1rem'}}>Already have an account?</Link>
         </form>
 
         </div >

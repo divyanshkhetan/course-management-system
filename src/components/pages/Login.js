@@ -5,8 +5,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     return (
@@ -35,6 +35,8 @@ const Login = () => {
                     <FormControlLabel value="faculty" control={<Radio />} label="Faculty" />
                 </RadioGroup>
             <Button type="submit" className="submit" variant="contained">Login</Button>
+            
+            <Link to="/signup" style={{margin: '1rem'}}>Create a new account?</Link>
         </form>
 
         </div >
