@@ -23,7 +23,7 @@ const Home = () => {
                 </div>
                 <div className="container">
                 <h1>Course Management System</h1>
-                <p>A better way for academic interactions</p>
+                <h3>A better way for academic interactions</h3>
                 With the advent of the first COVID-19 wave, the students started facing a lot of trouble to cope up with the academic curriculum without a proper platform to hold on to their academic records and facilitate the interaction with their respective institutions. This Course Management System is an attempt to:
                 <br />
                 <br />
