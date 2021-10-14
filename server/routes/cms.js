@@ -2,9 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-const cmsController = require('../controllers/cms');
+const signup = require('../controllers/signup');
 
-router.get('/', cmsController.cmsHomePage);
-router.post('/api/signup', cmsController.signup);
+router.post('/api/signup', signup);
 
 module.exports = router;
