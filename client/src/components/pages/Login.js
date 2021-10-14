@@ -12,12 +12,12 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
     
-    const [email, setEmail] = useState('');
+    const [rollno, setRollno] = useState('');
     const [password, setPassword] = useState('');
     const [userType, setUserType] = useState('student');
     
-    const handleChangeEmail = (e) => {
-        setEmail(e.target.value);
+    const handleChangeRollno = (e) => {
+        setRollno(e.target.value);
     }
     
     const handleChangePassword = (e) => {
@@ -31,7 +31,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log({
-            Email: email,
+            Rollno: rollno,
             Password: password,
             UserType: userType
         });
@@ -45,13 +45,13 @@ const Login = () => {
             <div className="heading">Login</div>
 
             <form onSubmit={handleSubmit} style={{ minWidth: '25vw', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <TextField id="email"
-                    label="Email Address"
+                <TextField id="rollno"
+                    label="Roll Number"
                     variant="outlined"
-                    type="email"
+                    type="text"
                     required
-                    onChange={handleChangeEmail}
-                    value={email}
+                    onChange={handleChangeRollno}
+                    value={rollno}
                     style={{ width: '100%', margin: '1rem' }} />
                 <TextField id="password"
                     label="Password"

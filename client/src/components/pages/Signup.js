@@ -13,6 +13,7 @@ const Login = () => {
 
     const [fname, setFname] = useState('');
     const [lname, setLname] = useState('');
+    const [rollno, setRollno] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [userType, setUserType] = useState('student');
@@ -22,6 +23,9 @@ const Login = () => {
     }
     const handleChangeLname = (e) => {
         setLname(e.target.value);
+    }
+    const handleChangeRollno = (e) => {
+        setRollno(e.target.value);
     }
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -38,6 +42,7 @@ const Login = () => {
         console.log({
             Fname: fname,
             Lname: lname,
+            Rollno: rollno,
             Email: email,
             Password: password,
             userType: userType
@@ -72,6 +77,14 @@ const Login = () => {
                         style={{margin: "0px 0px 0px 0.5rem"}}
                     />
                 </div>
+                <TextField id="rollno"
+                    label="Roll Number"
+                    variant="outlined"
+                    type="text"
+                    value={rollno}
+                    onChange={handleChangeRollno}
+                    required
+                    style={{ width: '100%', margin: '1rem' }} />
                 <TextField id="email"
                     label="Email Address"
                     variant="outlined"
@@ -79,7 +92,7 @@ const Login = () => {
                     value={email}
                     onChange={handleChangeEmail}
                     required
-                    style={{ width: '100%', margin: '1rem' }} />
+                    style={{ width: '100%' }} />
                 <TextField id="password"
                     label="Password"
                     varient="outlined"
@@ -87,7 +100,7 @@ const Login = () => {
                     value={password}
                     onChange={handleChangePassword}
                     required
-                    style={{ width: '100%', margin: '1rem', marginBottom: '1rem', marginTop: '0px' }} />
+                    style={{ width: '100%', margin: '1rem', marginBottom: '1rem', marginTop: '1rem' }} />
 
                 <RadioGroup row aria-label="user-type" name="user-type" onChange={handleChangeUserType} value={userType} style={{marginBottom: '1rem'}}>
                     <FormControlLabel value="student" control={<Radio />} label="Student" />

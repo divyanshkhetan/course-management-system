@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
-const PORT = 3001;
 
-// Creating connection
+const PORT = process.env.PORT || 3001;
 
+app.use(express.json());
+
+// Creating database connection
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -19,12 +21,10 @@ db.connect( err => {
     console.log("MySql Connected as id: " + db.threadId);
 });
 
+// Setting up router
+const routes = require('./routes/cms.js');
+app.use('/', routes);
 
-app.use(express.json());
-
-app.get('/', (req, res) => {
-    res.send("Hello World");
-});
 
 app.listen(PORT, () => {
     console.log("Server running at http://localhost:" + PORT);
