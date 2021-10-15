@@ -12,6 +12,7 @@ import axios from 'axios';
 
 const Login = () => {
 
+    const [errorMessage, setErrorMessage] = useState('');
     const [fname, setFname] = useState('');
     const [lname, setLname] = useState('');
     const [rollno, setRollno] = useState('');
@@ -51,6 +52,13 @@ const Login = () => {
         axios.post('http://localhost:3001/api/signup', data)
         .then((result) => {
             console.log(result.data);
+            if(result.data === 'duplicate'){
+                setErrorMessage('User Already Exists!');
+            } else if(result.data === 'success'){
+                setErrorMessage('Account Successfully Created!');
+            } else {
+                setErrorMessage('Unexpected Error Occured. Contact the administrator or try again in a few moments!');
+            }
         })
         .catch(err => {
             console.log(err);
@@ -117,6 +125,7 @@ const Login = () => {
             <Button type="submit" className="submit" variant="contained">Sign Up</Button>
             <Link to="/login" style={{margin: '1rem'}}>Already have an account?</Link>
         </form>
+        <div className="errorMessage">{errorMessage}</div>
 
         </div >
     )

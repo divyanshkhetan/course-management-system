@@ -1,8 +1,6 @@
 const db = require('../utils/db');
 const bcrypt = require('bcrypt');
 
-// TODO: signup based on userType
-
 const signup = async (req, res, next) => {                // Tested - Working
     let roll_number = req.body.rollno;
     let fname = req.body.fname;
