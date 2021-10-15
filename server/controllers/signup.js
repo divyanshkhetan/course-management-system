@@ -9,10 +9,13 @@ const signup = async (req, res, next) => {                // Tested - Working
     let password = req.body.password;
     let userType = req.body.userType;
     let tableName = 'students';
+    
     if(userType === 'student'){
         tableName = 'students';
-    } else {
+    } else if(userType === 'faculty'){
         tableName = 'instructors';
+    } else {
+        res.send('error');
     }
 
     // hashing password
@@ -27,12 +30,10 @@ const signup = async (req, res, next) => {                // Tested - Working
     db.query(query, (err, result) => {
         if(err) {
             if(err.code === 'ER_DUP_ENTRY'){
-                console.log("Duplicate Entry!");
-                res.send("duplicate");
+                res.send("duplicate");          // account already exists
             }
         } else {
-            console.log("Success!");
-            res.send("success");
+            res.send("success");                // account successfully created
         }
     });
 }

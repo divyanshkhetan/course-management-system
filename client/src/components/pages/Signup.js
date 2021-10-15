@@ -1,5 +1,5 @@
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import './Login.css';
+import './Signup.css';
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
-const Login = () => {
+const Signup = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
     const [fname, setFname] = useState('');
@@ -61,7 +61,7 @@ const Login = () => {
             }
         })
         .catch(err => {
-            console.log(err);
+            setErrorMessage('Unexpected Error Occured. Contact the administrator or try again in a few moments!');
         })
     }
 
@@ -131,4 +131,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Signup

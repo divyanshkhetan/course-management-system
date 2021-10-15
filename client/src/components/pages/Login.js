@@ -7,11 +7,12 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 
 
 const Login = () => {
     
+    const [errorMessage, setErrorMessage] = useState('');
     const [rollno, setRollno] = useState('');
     const [password, setPassword] = useState('');
     const [userType, setUserType] = useState('student');
@@ -30,11 +31,27 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({
-            Rollno: rollno,
-            Password: password,
-            UserType: userType
-        });
+        const data = {
+            rollno: rollno,
+            password: password,
+            userType: userType
+        };
+
+        axios.post('http://localhost:3001/api/login', data)
+        .then(result => {
+            if(result.data === 'success'){
+                setErrorMessage('User Authenticated!');
+            } else if(result.data === 'failed'){
+                setErrorMessage('Wrong Password!');
+            } else if(result.data === 'invalid'){
+                setErrorMessage('User Not Found!');
+            } else {
+                setErrorMessage('Unexpected Error Occured. Contact the administrator or try again in a few moments!');
+            }
+        })
+        .catch(err => {
+            setErrorMessage('Unexpected Error Occured. Contact the administrator or try again in a few moments!');
+        })
     }
 
     return (
@@ -69,7 +86,8 @@ const Login = () => {
             <Button type="submit" className="submit" variant="contained" >Login</Button>
             
             <Link to="/signup" style={{margin: '1rem'}}>Create a new account?</Link>
-        </form>
+        </form> 
+        <div className="errorMessage">{errorMessage}</div>
 
         </div >
     )
