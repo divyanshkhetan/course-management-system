@@ -8,6 +8,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -39,14 +40,21 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({
-            Fname: fname,
-            Lname: lname,
-            Rollno: rollno,
-            Email: email,
-            Password: password,
+        const data = {
+            fname: fname,
+            lname: lname,
+            rollno: rollno,
+            email: email,
+            password: password,
             userType: userType
-        });
+        };
+        axios.post('http://localhost:3001/api/signup', data)
+        .then((result) => {
+            console.log(result.data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     return (

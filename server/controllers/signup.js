@@ -1,6 +1,7 @@
 const db = require('../utils/db');
 const bcrypt = require('bcrypt');
 
+// TODO: signup based on userType
 
 const signup = async (req, res, next) => {                // Tested - Working
     let roll_number = req.body.rollno;
@@ -8,6 +9,13 @@ const signup = async (req, res, next) => {                // Tested - Working
     let lname = req.body.lname;
     let email = req.body.email;
     let password = req.body.password;
+    let userType = req.body.userType;
+    let tableName = 'students';
+    if(userType === 'student'){
+        tableName = 'students';
+    } else {
+        tableName = 'instructors';
+    }
 
     // hashing password
     const saltRounds = 10;
@@ -16,7 +24,7 @@ const signup = async (req, res, next) => {                // Tested - Working
     password = hashedPassword;
 
 
-    let query = `INSERT INTO students(roll_number, first_name, last_name, email, password) VALUES ('${roll_number}','${fname}','${lname}','${email}','${password}');`
+    let query = `INSERT INTO ${tableName}(roll_number, first_name, last_name, email, password) VALUES ('${roll_number}','${fname}','${lname}','${email}','${password}');`
 
     db.query(query, (err, result) => {
         if(err) {
