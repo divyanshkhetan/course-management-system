@@ -39,8 +39,9 @@ const Login = () => {
 
         axios.post('http://localhost:3001/api/login', data)
         .then(result => {
-            if(result.data === 'success'){
+            if(result.data.token){
                 setErrorMessage('User Authenticated!');
+                localStorage.setItem('token', result.data.token);       // Token saved on local browser
             } else if(result.data === 'failed'){
                 setErrorMessage('Wrong Password!');
             } else if(result.data === 'invalid'){

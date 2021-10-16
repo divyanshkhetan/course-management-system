@@ -1,5 +1,8 @@
 const db = require('../utils/db');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const login = async(req, res, next) => {            // Tested - Working
     const rollno = req.body.rollno;
@@ -28,7 +31,10 @@ const login = async(req, res, next) => {            // Tested - Working
                         res.send('error');              // unexpected error occured
                     } else {
                         if(response){
-                            res.send('success');        // found and matched
+                            // generating a JWT token
+                            jwt.sign({rollno, userType}, process.env.TOKEN_SECRET, {expiresIn: '1800s'}, (err, token) => {
+                                res.json({token});            // found and matched so JWT token
+                            })
                         } else {
                             res.send('failed');         // password incorrect
                         }
