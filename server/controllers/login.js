@@ -18,7 +18,7 @@ const login = async(req, res, next) => {            // Tested - Working
         res.send('error');
     }
 
-    const query = `SELECT roll_number, password FROM ${tableName} WHERE roll_number = '${rollno}'`;
+    const query = `SELECT first_name, roll_number, password FROM ${tableName} WHERE roll_number = '${rollno}'`;
 
     db.query(query, (err, result) => {
         if(err){
@@ -26,13 +26,14 @@ const login = async(req, res, next) => {            // Tested - Working
         } else {
             if(result.length > 0){
                 const profile = result[0];
+                const fname = profile.first_name;
                 bcrypt.compare(password, profile.password, (err, response) => {
                     if(err){
                         res.send('error');              // unexpected error occured
                     } else {
                         if(response){
                             // generating a JWT token
-                            jwt.sign({rollno, userType}, process.env.TOKEN_SECRET, {expiresIn: '1800s'}, (err, token) => {
+                            jwt.sign({rollno, userType, fname}, process.env.TOKEN_SECRET, {expiresIn: '1800s'}, (err, token) => {
                                 res.json({token});            // found and matched so JWT token
                             })
                         } else {

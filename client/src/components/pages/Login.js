@@ -6,9 +6,8 @@ import Button from '@mui/material/Button';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-
 
 const Login = () => {
     
@@ -16,6 +15,7 @@ const Login = () => {
     const [rollno, setRollno] = useState('');
     const [password, setPassword] = useState('');
     const [userType, setUserType] = useState('student');
+    const [loggedIn, setLoggedIn] = useState(false);
     
     const handleChangeRollno = (e) => {
         setRollno(e.target.value);
@@ -42,6 +42,9 @@ const Login = () => {
             if(result.data.token){
                 setErrorMessage('User Authenticated!');
                 localStorage.setItem('token', result.data.token);       // Token saved on local browser
+                
+                // redirect condition set true
+                setLoggedIn(true);
             } else if(result.data === 'failed'){
                 setErrorMessage('Wrong Password!');
             } else if(result.data === 'invalid'){
@@ -89,7 +92,7 @@ const Login = () => {
             <Link to="/signup" style={{margin: '1rem'}}>Create a new account?</Link>
         </form> 
         <div className="errorMessage">{errorMessage}</div>
-
+        {loggedIn && <Redirect to="dashboard" />}
         </div >
     )
 }

@@ -9,6 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router';
 
 const Signup = () => {
 
@@ -19,6 +20,7 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [userType, setUserType] = useState('student');
+    const [loginRedirect, setLoginRedirect] = useState(false);
 
     const handleChangeFname = (e) => {
         setFname(e.target.value);
@@ -56,6 +58,7 @@ const Signup = () => {
                 setErrorMessage('User Already Exists!');
             } else if(result.data === 'success'){
                 setErrorMessage('Account Successfully Created!');
+                setLoginRedirect(true);
             } else {
                 setErrorMessage('Unexpected Error Occured. Contact the administrator or try again in a few moments!');
             }
@@ -126,7 +129,7 @@ const Signup = () => {
             <Link to="/login" style={{margin: '1rem'}}>Already have an account?</Link>
         </form>
         <div className="errorMessage">{errorMessage}</div>
-
+        {loginRedirect && <Redirect to="/login" />}
         </div >
     )
 }
