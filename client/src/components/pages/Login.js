@@ -11,6 +11,11 @@ import axios from 'axios';
 
 const Login = () => {
     
+    if(localStorage.getItem('token') !== null){
+
+    } else {
+        localStorage.setItem('token', null);
+    }
     const [errorMessage, setErrorMessage] = useState('');
     const [rollno, setRollno] = useState('');
     const [password, setPassword] = useState('');

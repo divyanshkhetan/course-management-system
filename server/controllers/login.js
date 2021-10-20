@@ -33,7 +33,8 @@ const login = async(req, res, next) => {            // Tested - Working
                     } else {
                         if(response){
                             // generating a JWT token
-                            jwt.sign({rollno, userType, fname}, process.env.TOKEN_SECRET, {expiresIn: '1800s'}, (err, token) => {
+                            jwt.sign({rollno, userType, fname}, process.env.TOKEN_SECRET, {expiresIn: '18000s'}, (err, token) => {
+                                console.log(token);            // TO BE REMOVED
                                 res.json({token});            // found and matched so JWT token
                             })
                         } else {

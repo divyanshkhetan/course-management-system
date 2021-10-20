@@ -4,17 +4,34 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import jwt_decode from "jwt-decode";
+import { Redirect, useHistory } from 'react-router';
+import axios from 'axios';
+import { useState } from 'react';
 
 const Dashboard = () => {
 
-    function parseJwt(token) {
-        if (!token) { return; }
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace('-', '+').replace('_', '/');
-        return JSON.parse(window.atob(base64));
+    const history = useHistory();
+    const [tokenPresent, setTokenPresent] = useState(false);
+
+    if(localStorage.getItem('token') !== 'null'){
+        axios.post('http://localhost:3001/tokenCheck', {token: localStorage.getItem('token')})
+        .then(res => {
+            if(res.data === 'valid'){
+                setTokenPresent(true);
+            } else {
+                history.push('/');
+            }
+        })
+        .catch(err => localStorage.setItem('token', null));
+    } else {
+        history.push('/');
     }
 
     const localToken = localStorage.getItem('token');
+    if(localToken === null){
+        history.push('/');
+    }
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -24,6 +41,14 @@ const Dashboard = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const logoutHandler = () => {
+        localStorage.setItem('token', null);
+        history.push('/');
+    }
+    const myAccountHandler = () => {
+        history.push('/profile');
+    }
+
 
     return (
         <div>
@@ -38,7 +63,7 @@ const Dashboard = () => {
                         aria-expanded={open ? 'true' : undefined}
                         onClick={handleClick}
                     >
-                        {parseJwt(localToken).fname}
+                        {tokenPresent && jwt_decode(localToken).fname}
                         < ArrowDropDownIcon />
                     </Button>
                     <Menu
@@ -50,8 +75,8 @@ const Dashboard = () => {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={handleClose}>My account</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        <MenuItem onClick={(event) => { handleClose(); myAccountHandler(); }}>My account</MenuItem>
+                        <MenuItem onClick={(event) => { handleClose(); logoutHandler(); }}>Logout</MenuItem>
                     </Menu>
                 </div>
             </div>

@@ -10,6 +10,7 @@ const signup = require('../controllers/signup');
 const login = require('../controllers/login');
 const welcome = require('../controllers/welcome');
 const profileInfo = require('../controllers/profileInfo');
+const editProfile = require('../controllers/editProfile');
 
 // Routes
 router.post('/api/signup', signup);
@@ -19,5 +20,6 @@ router.post('/tokenCheck', auth, (req, res) => {
     res.send('valid');
 });
 router.post('/api/profileInfo', auth, profileInfo);
+router.post('/api/editProfile', auth, editProfile);
 
 module.exports = router;
