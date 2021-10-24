@@ -62,7 +62,7 @@ const Profile = () => {
         }
         axios.post('http://localhost:3001/api/editProfile', data)
         .then(response => {
-            console.log(response);
+            console.log('success');
             if(response.data === 'success'){
                 history.push('/dashboard');
             }

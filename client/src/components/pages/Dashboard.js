@@ -8,6 +8,7 @@ import jwt_decode from "jwt-decode";
 import { Redirect, useHistory } from 'react-router';
 import axios from 'axios';
 import { useState } from 'react';
+import VerticalTabs from '../VerticalTabs';
 
 const Dashboard = () => {
 
@@ -80,6 +81,10 @@ const Dashboard = () => {
                     </Menu>
                 </div>
             </div>
+
+            <div className="main">
+                <VerticalTabs />                
+            </div>            
         </div>
     )
 }
