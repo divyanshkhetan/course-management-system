@@ -23,7 +23,7 @@ const courses = (req, res) => {
     if(userType === 'student'){
         query = `SELECT * from courses WHERE course_id  IN (Select course_id FROM course_students WHERE student_id='${rollno}')`;
     } else {
-
+        query = `SELECT * from courses WHERE instructor_id='${rollno}'`;
     }
 
     db.query(query, (err, result) => {

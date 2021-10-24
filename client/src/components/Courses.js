@@ -23,7 +23,6 @@ const Courses = () => {
     const apiCall = async () => {
         axios.post('http://localhost:3001/api/courses', data)
             .then(response => {
-                response.data.map(course => console.log(course.course_name));
                 setCourseList(response.data);
             })
             .catch(err => {
@@ -35,7 +34,7 @@ const Courses = () => {
         <>
             <div style={{display:"flex", flexDirection:"row", flexWrap:"wrap"}}>
                 {courseList.length > 0 && courseList.map(course => {
-                    return (< ActionAreaCard courseName={course.course_name} courseID={course.course_id} />)
+                    return (< ActionAreaCard key={course.course_id} courseName={course.course_name} courseID={course.course_id} />)
                 })}
             </div>
         </>

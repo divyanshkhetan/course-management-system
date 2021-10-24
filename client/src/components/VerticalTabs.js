@@ -5,6 +5,11 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Courses from './Courses';
+import Button from '@mui/material/Button';
+import jwtDecode from 'jwt-decode';
+import { useHistory } from 'react-router';
+import { useState } from 'react';
+import NewCourse from './NewCourse';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -19,7 +24,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component={'span'}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -41,10 +46,18 @@ function a11yProps(index) {
 
 const VerticalTabs = () => {
   const [value, setValue] = React.useState(0);
+  const [newCourse, setNewCourse] = useState(false);
+  const token = localStorage.getItem('token');
+  const decode = jwtDecode(token);
+  const history = useHistory();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleNewCourse = (e) => {
+    setNewCourse(true);
+  }
 
   return (
     <Box
@@ -56,13 +69,17 @@ const VerticalTabs = () => {
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: 'divider' , minWidth: "10vw"}}
+        sx={{ borderRight: 1, borderColor: 'divider', minWidth: "10vw" }}
       >
         <Tab label="Courses" {...a11yProps(0)} />
         <Tab label="Assignments" {...a11yProps(1)} />
         <Tab label="Quizes" {...a11yProps(2)} />
       </Tabs>
       <TabPanel value={value} index={0}>
+        <div style={{width: '85vw', textAlign: 'right', padding:'0.5rem' }}>
+          { newCourse === false && decode.userType === 'faculty' && <Button onClick={handleNewCourse} variant="contained" >Add a new Course</Button> }
+          { newCourse === true && < NewCourse /> }
+        </div>
         <Courses />
       </TabPanel>
       <TabPanel value={value} index={1}>
