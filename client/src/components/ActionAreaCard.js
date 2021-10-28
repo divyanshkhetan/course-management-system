@@ -3,11 +3,19 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, dividerClasses } from '@mui/material';
+import { useHistory } from 'react-router';
 
 const ActionAreaCard = ({courseID, courseName}) => {
+
+  const history = useHistory();
+
+  const redirection = () => {
+    history.push(`/course/${courseID}`);
+  }
+
   return (
     <Card sx={{minWidth: "15rem", maxWidth: "20rem", margin: "1rem" }}>
-      <CardActionArea>
+      <CardActionArea onClick={redirection}>
         <CardMedia
           component="img"
           height="140"

@@ -9,7 +9,6 @@ const Courses = () => {
     const data = { token: localStorage.getItem('token') };
     const history = useHistory();
     const [courseList, setCourseList] = useState('');
-    let courses = '';
 
     if (data === 'null' || !data) {
         history.push('/');

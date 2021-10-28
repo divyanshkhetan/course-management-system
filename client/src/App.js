@@ -5,6 +5,7 @@ import Signup from './components/pages/Signup';
 import Home from './components/pages/Home'
 import Dashboard from './components/pages/Dashboard';
 import Profile from './components/pages/Profile';
+import CoursePage from './components/CoursePage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route exact path='/signup' component={Signup} />
       <Route exact path='/dashboard' component={Dashboard} />
       <Route exact path='/profile' component={Profile} />
+      <Route exact path='/course/:courseid' component={CoursePage} />
     </Router>
   );
 }

@@ -9,7 +9,8 @@ import Button from '@mui/material/Button';
 import jwtDecode from 'jwt-decode';
 import { useHistory } from 'react-router';
 import { useState } from 'react';
-import NewCourse from './NewCourse';
+import NewCourseFaculty from './NewCourseFaculty';
+import NewCourseStudent from './NewCourseStudent';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -78,7 +79,9 @@ const VerticalTabs = () => {
       <TabPanel value={value} index={0}>
         <div style={{width: '85vw', textAlign: 'right', padding:'0.5rem' }}>
           { newCourse === false && decode.userType === 'faculty' && <Button onClick={handleNewCourse} variant="contained" >Add a new Course</Button> }
-          { newCourse === true && < NewCourse /> }
+          { newCourse === true  && decode.userType === 'faculty' && < NewCourseFaculty /> }
+          { newCourse === false && decode.userType === 'student' && <Button onClick={handleNewCourse} variant="contained" >Add a new Course</Button> }
+          { newCourse === true  && decode.userType === 'student' && < NewCourseStudent /> }
         </div>
         <Courses />
       </TabPanel>

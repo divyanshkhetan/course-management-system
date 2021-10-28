@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 
-const NewCourse = () => {
+const NewCourseFaculty = () => {
     
     const history = useHistory();
     const [courseID, setCourseID] = useState('');
@@ -58,4 +58,4 @@ const NewCourse = () => {
     )
 }
 
-export default NewCourse
+export default NewCourseFaculty
