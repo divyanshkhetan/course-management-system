@@ -5,7 +5,7 @@ import Signup from './components/pages/Signup';
 import Home from './components/pages/Home'
 import Dashboard from './components/pages/Dashboard';
 import Profile from './components/pages/Profile';
-import CoursePage from './components/CoursePage';
+import CoursePage from './components/pages/CoursePage.js';
 
 function App() {
   return (
