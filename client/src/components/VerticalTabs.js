@@ -11,6 +11,7 @@ import { useHistory } from 'react-router';
 import { useState } from 'react';
 import NewCourseFaculty from './NewCourseFaculty';
 import NewCourseStudent from './NewCourseStudent';
+import NewAssignmentFaculty from './NewAssignmentFaculty';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,6 +49,7 @@ function a11yProps(index) {
 const VerticalTabs = () => {
   const [value, setValue] = React.useState(0);
   const [newCourse, setNewCourse] = useState(false);
+  const [newAssignment, setNewAssignment] = useState(false);
   const token = localStorage.getItem('token');
   const decode = jwtDecode(token);
   const history = useHistory();
@@ -58,6 +60,10 @@ const VerticalTabs = () => {
 
   const handleNewCourse = (e) => {
     setNewCourse(true);
+  }
+  
+  const handleNewAssignment = (e) => {
+    setNewAssignment(true);
   }
 
   return (
@@ -86,7 +92,10 @@ const VerticalTabs = () => {
         <Courses />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+      <div style={{width: '85vw', textAlign: 'right', padding:'0.5rem' }}>
+          { newAssignment === false && decode.userType === 'faculty' && <Button onClick={handleNewAssignment} variant="contained" >Add a new Course</Button> }
+          { newAssignment === true  && decode.userType === 'faculty' && < NewAssignmentFaculty /> }
+        </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

@@ -16,6 +16,7 @@ const newCourse = require('../controllers/newCourse');
 const showNewCourses = require('../controllers/showNewCourses');
 const addNewCourseStudent = require('../controllers/addNewCourseStudent');
 const courseDetailsStudent = require('../controllers/courseDetailsStudent');
+const newAssignment = require('../controllers/newAssignment');
 
 // Routes
 router.post('/api/signup', signup);
@@ -31,5 +32,6 @@ router.post('/api/newCourse', auth, newCourse);
 router.post('/api/showNewCourses', auth, showNewCourses);
 router.post('/api/addNewCourseStudent', auth, addNewCourseStudent);
 router.post('/api/courseDetailsStudent', auth, courseDetailsStudent);
+router.post('/api/newAssignmentFaculty', auth, newAssignment);
 
 module.exports = router;
