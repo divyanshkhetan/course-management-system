@@ -5,12 +5,12 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, dividerClasses } from '@mui/material';
 import { useHistory } from 'react-router';
 
-const ActionAreaCard = ({courseID, courseName}) => {
+const ActionAreaCardAssignment = ({assignmentID, question, courseID}) => {
 
   const history = useHistory();
 
   const redirection = () => {
-    history.push(`/course/${courseID}`);
+    history.push(`/assignment/${assignmentID}`);
   }
 
   return (
@@ -24,10 +24,10 @@ const ActionAreaCard = ({courseID, courseName}) => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {courseID}
+            {courseID} - {assignmentID}
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            {courseName}
+            {question}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -35,4 +35,4 @@ const ActionAreaCard = ({courseID, courseName}) => {
   );
 }
 
-export default ActionAreaCard;
+export default ActionAreaCardAssignment;

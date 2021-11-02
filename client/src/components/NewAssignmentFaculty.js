@@ -5,7 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 
-const NewAssignmentFaculty = () => {
+const NewAssignmentFaculty = ({newAssignmentState}) => {
 
     const history = useHistory();
     const [assignmentID, setAssignmentID] = useState('');
@@ -41,6 +41,9 @@ const NewAssignmentFaculty = () => {
             } else if(response.data === 'Access Denied'){
                 setErrorMessage("You are not Authorized to give assignment in this course");
             } else {
+                if(response.data === 'success'){
+                    newAssignmentState(false);
+                }
                 setErrorMessage(response.data);
             }
         })

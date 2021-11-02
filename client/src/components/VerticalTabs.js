@@ -8,10 +8,11 @@ import Courses from './Courses';
 import Button from '@mui/material/Button';
 import jwtDecode from 'jwt-decode';
 import { useHistory } from 'react-router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NewCourseFaculty from './NewCourseFaculty';
 import NewCourseStudent from './NewCourseStudent';
 import NewAssignmentFaculty from './NewAssignmentFaculty';
+import Assignments from './Assignments';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,10 +62,17 @@ const VerticalTabs = () => {
   const handleNewCourse = (e) => {
     setNewCourse(true);
   }
-  
+
   const handleNewAssignment = (e) => {
     setNewAssignment(true);
   }
+
+  const newAssignmentState = (assignmentState) => {
+    setNewAssignment(assignmentState);
+  }
+
+  useEffect(() => {
+  }, [newAssignment]);
 
   return (
     <Box
@@ -83,19 +91,20 @@ const VerticalTabs = () => {
         <Tab label="Quizes" {...a11yProps(2)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <div style={{width: '85vw', textAlign: 'right', padding:'0.5rem' }}>
-          { newCourse === false && decode.userType === 'faculty' && <Button onClick={handleNewCourse} variant="contained" >Add a new Course</Button> }
-          { newCourse === true  && decode.userType === 'faculty' && < NewCourseFaculty /> }
-          { newCourse === false && decode.userType === 'student' && <Button onClick={handleNewCourse} variant="contained" >Add a new Course</Button> }
-          { newCourse === true  && decode.userType === 'student' && < NewCourseStudent /> }
+        <div style={{ width: '85vw', textAlign: 'right', padding: '0.5rem' }}>
+          {newCourse === false && decode.userType === 'faculty' && <Button onClick={handleNewCourse} variant="contained" >Add a new Course</Button>}
+          {newCourse === true && decode.userType === 'faculty' && < NewCourseFaculty />}
+          {newCourse === false && decode.userType === 'student' && <Button onClick={handleNewCourse} variant="contained" >Add a new Course</Button>}
+          {newCourse === true && decode.userType === 'student' && < NewCourseStudent />}
         </div>
         <Courses />
       </TabPanel>
       <TabPanel value={value} index={1}>
-      <div style={{width: '85vw', textAlign: 'right', padding:'0.5rem' }}>
-          { newAssignment === false && decode.userType === 'faculty' && <Button onClick={handleNewAssignment} variant="contained" >Add a new Course</Button> }
-          { newAssignment === true  && decode.userType === 'faculty' && < NewAssignmentFaculty /> }
+        <div style={{ width: '85vw', textAlign: 'right', padding: '0.5rem' }}>
+          {newAssignment === false && decode.userType === 'faculty' && <Button onClick={handleNewAssignment} variant="contained" >Add a new Course</Button>}
+          {newAssignment === true && decode.userType === 'faculty' && < NewAssignmentFaculty newAssignmentState={newAssignmentState} />}
         </div>
+        < Assignments />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

@@ -2,13 +2,13 @@ import axios from "axios";
 import { useHistory } from 'react-router';
 import { useEffect } from "react";
 import { useState } from "react";
-import ActionAreaCardCourse from "./ActionAreaCardCourse";
+import ActionAreaCardAssignment from "./ActionAreaCardAssignment";
 
-const Courses = () => {
+const Assignments = () => {
     const token = localStorage.getItem('token');
     const data = { token: localStorage.getItem('token') };
     const history = useHistory();
-    const [courseList, setCourseList] = useState('');
+    const [assignmentList, setAssignmentList] = useState('');
 
     if (data === 'null' || !data) {
         history.push('/');
@@ -20,9 +20,9 @@ const Courses = () => {
 
 
     const apiCall = async () => {
-        axios.post('http://localhost:3001/api/courses', data)
+        axios.post('http://localhost:3001/api/assignments', data)
             .then(response => {
-                setCourseList(response.data);
+                setAssignmentList(response.data);
             })
             .catch(err => {
                 console.log('Error');
@@ -32,12 +32,12 @@ const Courses = () => {
     return (
         <>
             <div style={{display:"flex", flexDirection:"row", flexWrap:"wrap"}}>
-                {courseList.length > 0 && courseList.map(course => {
-                    return (< ActionAreaCardCourse key={course.course_id} courseName={course.course_name} courseID={course.course_id} />)
+                {assignmentList.length > 0 && assignmentList.map(assignment => {
+                    return (< ActionAreaCardAssignment key={assignment.assignment_id} question={assignment.question} assignmentID={assignment.assignment_id} courseID={assignment.course_id}/>)
                 })}
             </div>
         </>
     )
 }
 
-export default Courses
+export default Assignments
