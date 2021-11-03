@@ -26,7 +26,7 @@ const ActionAreaCardAssignment = ({assignmentID, question, courseID}) => {
           <Typography gutterBottom variant="h5" component="div">
             {courseID} - {assignmentID}
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" color="text.secondary" style={{maxHeight: '2rem'}}>
             {question}
           </Typography>
         </CardContent>

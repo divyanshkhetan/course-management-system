@@ -6,6 +6,7 @@ import Home from './components/pages/Home'
 import Dashboard from './components/pages/Dashboard';
 import Profile from './components/pages/Profile';
 import CoursePage from './components/pages/CoursePage.js';
+import AssignmentPage from './components/pages/AssignmentPage.js';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route exact path='/dashboard' component={Dashboard} />
       <Route exact path='/profile' component={Profile} />
       <Route exact path='/course/:courseid' component={CoursePage} />
+      < Route exact path='/assignment/:assignmentid' component={AssignmentPage} />
     </Router>
   );
 }

@@ -8,6 +8,7 @@ const showAssignments = (req, res) => {
     const decoded = decoder(token);
     const rollno = decoded.rollno;
     const userType = decoded.userType;
+    const assignmentid = req.body.assignmentid;
 
     let tableName = 'student';
     if (userType === 'student') {
@@ -21,7 +22,14 @@ const showAssignments = (req, res) => {
     let query = '';
 
     if(userType === 'student'){
-        query = `SELECT * from assignments WHERE course_id IN (SELECT course_id FROM course_students WHERE student_id='${rollno}')`;
+        if(assignmentid === 'null'){
+            query = `SELECT * from assignments WHERE course_id IN (SELECT course_id FROM course_students WHERE student_id='${rollno}')`;     
+        } else {
+            query = `SELECT * from assignments WHERE assignment_id=${assignmentid} AND course_id IN (SELECT course_id FROM course_students WHERE student_id='${rollno}')`;     
+        }
+        
+
+        
     } else {
         query = `SELECT * from assignments WHERE course_id IN (SELECT course_id FROM courses WHERE instructor_id='${rollno}')`;
     }

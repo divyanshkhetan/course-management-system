@@ -6,7 +6,7 @@ import ActionAreaCardAssignment from "./ActionAreaCardAssignment";
 
 const Assignments = () => {
     const token = localStorage.getItem('token');
-    const data = { token: localStorage.getItem('token') };
+    const data = { token: localStorage.getItem('token'), assignmentid:'null' };
     const history = useHistory();
     const [assignmentList, setAssignmentList] = useState('');
 
