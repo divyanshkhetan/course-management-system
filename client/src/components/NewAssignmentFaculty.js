@@ -11,6 +11,7 @@ const NewAssignmentFaculty = ({newAssignmentState}) => {
     const [assignmentID, setAssignmentID] = useState('');
     const [assignmentQuestion, setAssignmentQuestion] = useState('');
     const [courseID, setCourseID] = useState('');
+    const [maxMarks, setMaxMarks] = useState(10);
     const [errorMessage, setErrorMessage] = useState('');
 
     const assignmentIDHandler = (e) => {
@@ -24,6 +25,10 @@ const NewAssignmentFaculty = ({newAssignmentState}) => {
     const courseIDHandler = (e) => {
         setCourseID(e.target.value);
     }
+    
+    const maxMarksHandler = (e) => {
+        setMaxMarks(e.target.value);
+    }
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -31,7 +36,8 @@ const NewAssignmentFaculty = ({newAssignmentState}) => {
             token: localStorage.getItem('token'),
             assignmentID: assignmentID,
             assignmentQuestion: assignmentQuestion,
-            courseID: courseID
+            courseID: courseID,
+            maxMarks: maxMarks
         }
 
         axios.post('http://localhost:3001/api/newAssignmentFaculty', data)
@@ -56,8 +62,9 @@ const NewAssignmentFaculty = ({newAssignmentState}) => {
         <div style={{ width: '100%' }}>
             <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className="courseDetails" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                    <TextField value={assignmentID} onChange={assignmentIDHandler} id="assignmentID" label="Assignment ID" variant="standard"  />
+                    <TextField value={assignmentID} onChange={assignmentIDHandler} id="assignmentID" label="Assignment Number" variant="standard"  />
                     <TextField value={courseID} onChange={courseIDHandler} id="courseID" label="Course ID" variant="standard" style={{margin: '1rem'}} />
+                    <TextField value={maxMarks} onChange={maxMarksHandler} id="max_marks" label="Max Marks" variant="standard" style={{margin: '1rem'}} />
                     <TextField value={assignmentQuestion} onChange={assignmentQuestionHandler} id="assignmentQuestion" label="Assignment Question" multiline minRows="10" style={{margin: '1rem', width: '100%'}}/>
                 </div>
                 <div style={{margin: '1rem'}}>{errorMessage}</div>

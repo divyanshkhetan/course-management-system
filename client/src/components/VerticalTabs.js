@@ -101,7 +101,7 @@ const VerticalTabs = () => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div style={{ width: '85vw', textAlign: 'right', padding: '0.5rem' }}>
-          {newAssignment === false && decode.userType === 'faculty' && <Button onClick={handleNewAssignment} variant="contained" >Add a new Course</Button>}
+          {newAssignment === false && decode.userType === 'faculty' && <Button onClick={handleNewAssignment} variant="contained" >Add a New Assignment</Button>}
           {newAssignment === true && decode.userType === 'faculty' && < NewAssignmentFaculty newAssignmentState={newAssignmentState} />}
         </div>
         < Assignments />

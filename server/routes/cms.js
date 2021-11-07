@@ -1,9 +1,11 @@
 const express = require('express');
+const multer = require('multer');
 
 const router = express.Router();
 
 // Middlewares
 const auth = require('../middlewares/auth');
+const {upload, uploadFile} = require('../middlewares/fileUploader');
 
 // Controllers
 const signup = require('../controllers/signup');
@@ -18,6 +20,8 @@ const addNewCourseStudent = require('../controllers/addNewCourseStudent');
 const courseDetailsStudent = require('../controllers/courseDetailsStudent');
 const newAssignment = require('../controllers/newAssignment');
 const showAssignments = require('../controllers/showAssignments');
+const assignmentFileDownloader = require('../controllers/assignmentFileDownloader');
+const deleteCourse = require('../controllers/deleteCourse');
 
 // Routes
 router.post('/api/signup', signup);
@@ -35,5 +39,8 @@ router.post('/api/addNewCourseStudent', auth, addNewCourseStudent);
 router.post('/api/courseDetailsStudent', auth, courseDetailsStudent);
 router.post('/api/newAssignmentFaculty', auth, newAssignment);
 router.post('/api/assignments', auth, showAssignments);
+router.post('/api/studentAssignmentSubmit',uploadFile, upload);
+router.post('/api/assignmentFileDownloader', auth, assignmentFileDownloader);
+router.post('/api/deleteCourse', auth, deleteCourse);
 
 module.exports = router;

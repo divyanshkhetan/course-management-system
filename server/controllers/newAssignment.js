@@ -9,6 +9,7 @@ const newAssignment = (req, res) => {
     const assignmentID = req.body.assignmentID;
     const assignmentQuestion = req.body.assignmentQuestion;
     const courseID = req.body.courseID;
+    const maxMarks = req.body.maxMarks;
 
     if (userType !== 'faculty') {
         res.send('Access Denied');
@@ -22,7 +23,7 @@ const newAssignment = (req, res) => {
             console.log(err.code);
         }
         if (response.length > 0) {    //working
-            query = `INSERT INTO assignments (assignment_id, course_id, question) VALUES ('${assignmentID}','${courseID}','${assignmentQuestion}')`;
+            query = `INSERT INTO assignments (assignment_id, course_id, question, max_marks) VALUES ('${courseID}_${assignmentID}','${courseID}','${assignmentQuestion}','${maxMarks}')`;
 
             db.query(query, (error, result) => {
                 if (error) {
