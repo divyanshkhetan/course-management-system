@@ -7,6 +7,8 @@ import Dashboard from './components/pages/Dashboard';
 import Profile from './components/pages/Profile';
 import CoursePage from './components/pages/CoursePage.js';
 import AssignmentPage from './components/pages/AssignmentPage.js';
+import NewQuizPage from './components/pages/NewQuizPage';
+import ViewQuizPage from './components/pages/ViewQuizPage';
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
       <Route exact path='/dashboard' component={Dashboard} />
       <Route exact path='/profile' component={Profile} />
       <Route exact path='/course/:courseid' component={CoursePage} />
-      < Route exact path='/assignment/:assignmentid' component={AssignmentPage} />
+      <Route exact path='/assignment/:assignmentid' component={AssignmentPage} />
+      <Route exact path='/new/Quiz' component={NewQuizPage} />
+      <Route exact path='/quiz/:quizid' component={ViewQuizPage} />
     </Router>
   );
 }

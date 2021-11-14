@@ -14,7 +14,7 @@ const ActionAreaCardCourse = ({courseID, courseName}) => {
   }
 
   return (
-    <Card sx={{minWidth: "15rem", maxWidth: "20rem", margin: "1rem" }}>
+    <Card sx={{minWidth: "15rem", maxWidth: "20rem", margin: "0.5rem" }}>
       <CardActionArea onClick={redirection}>
         <CardMedia
           component="img"

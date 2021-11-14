@@ -1,6 +1,4 @@
 const db = require('../utils/db');
-const dotenv = require('dotenv');
-dotenv.config();
 const decoder = require('jwt-decode');
 
 const showAssignments = (req, res) => {

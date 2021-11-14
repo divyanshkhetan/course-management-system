@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 import { Redirect, useHistory } from 'react-router';
 import axios from 'axios';
 import { useState } from 'react';
+import { Link } from '@mui/material';
 
 import './Navbar.css';
 
@@ -50,10 +51,13 @@ const NavBar = () => {
         history.push('/profile');
     }
 
+    const brandingClickHandler = () => {
+        history.push('/dashboard');
+    }
 
     return (
         <div className="navbar">
-                <div className="branding">Course Management System</div>
+                <div style={{cursor: 'pointer'}} className="branding" onClick={brandingClickHandler}>Course Management System</div>
                 <div className="profile">
                     <Button
                         variant="outlined"

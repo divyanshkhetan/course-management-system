@@ -7,7 +7,7 @@ const assignmentFileDownloader = (req, res) => {
     res.sendFile(path.resolve(__dirname + `/../public/uploads/${filename}`));
     var data =fs.readFileSync(path.resolve(__dirname + `/../public/uploads/${filename}`));
     res.contentType("application/pdf");
-    res.send(data);
+    res.send(data); 
 }
 
 module.exports = assignmentFileDownloader;

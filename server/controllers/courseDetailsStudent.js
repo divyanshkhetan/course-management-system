@@ -28,7 +28,8 @@ const courseDetailsStudent = (req, res) => {
                     response_data = [...response_data, ...result];
                     // console.log(response_data);
 
-                    query = `SELECT COUNT(quiz_id) AS no_of_quizes, SUM(maximum_marks) AS quiz_marks_total, (SELECT SUM(marks_obtained) FROM quiz_marks WHERE course_id='${courseID}' AND student_id='${rollno}') AS quiz_marks_obtnd from quizes where course_id='${courseID}'`;
+                    // query = `SELECT COUNT(quiz_id) AS no_of_quizes, SUM(maximum_marks) AS quiz_marks_total, (SELECT SUM(marks_obtained) FROM quiz_marks WHERE course_id='${courseID}' AND student_id='${rollno}') AS quiz_marks_obtnd from quizes where course_id='${courseID}'`;
+                    query = `SELECT COUNT(*) AS no_of_quizes, SUM(score) AS quiz_marks_obtnd FROM results WHERE student_id='${rollno}' AND quiz_id IN (SELECT quiz_id from quizes WHERE course_id='${courseID}')`;
 
                     db.query(query, (err, result) => {
                         if(err){

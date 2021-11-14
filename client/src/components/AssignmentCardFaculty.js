@@ -27,6 +27,7 @@ const AssignmentCardFaculty = ({ rollno, marksObtainedDB, maxMarks, courseID, as
         // console.log(data);
         axios.post('http://localhost:3001/api/assignmentFileDownloader', data)
         .then(response => {
+            console.log(response);
             download(response, "assignment.pdf", "application/pdf");
         })
         .catch(err => {

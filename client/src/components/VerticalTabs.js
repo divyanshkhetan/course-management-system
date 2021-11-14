@@ -13,6 +13,7 @@ import NewCourseFaculty from './NewCourseFaculty';
 import NewCourseStudent from './NewCourseStudent';
 import NewAssignmentFaculty from './NewAssignmentFaculty';
 import Assignments from './Assignments';
+import ExistingQuizes from './pages/ExistingQuizes';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -71,6 +72,10 @@ const VerticalTabs = () => {
     setNewAssignment(assignmentState);
   }
 
+  const newQuizHandler = (e) => {
+    history.push('/new/Quiz');
+  }
+
   useEffect(() => {
   }, [newAssignment]);
 
@@ -91,7 +96,7 @@ const VerticalTabs = () => {
         <Tab label="Quizes" {...a11yProps(2)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <div style={{ width: '85vw', textAlign: 'right', padding: '0.5rem' }}>
+        <div style={{ width: '85vw', textAlign: 'center', padding: '0.5rem' }}>
           {newCourse === false && decode.userType === 'faculty' && <Button onClick={handleNewCourse} variant="contained" >Add a new Course</Button>}
           {newCourse === true && decode.userType === 'faculty' && < NewCourseFaculty />}
           {newCourse === false && decode.userType === 'student' && <Button onClick={handleNewCourse} variant="contained" >Add a new Course</Button>}
@@ -100,14 +105,17 @@ const VerticalTabs = () => {
         <Courses />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div style={{ width: '85vw', textAlign: 'right', padding: '0.5rem' }}>
+        <div style={{ width: '85vw', textAlign: 'center', padding: '0.5rem' }}>
           {newAssignment === false && decode.userType === 'faculty' && <Button onClick={handleNewAssignment} variant="contained" >Add a New Assignment</Button>}
           {newAssignment === true && decode.userType === 'faculty' && < NewAssignmentFaculty newAssignmentState={newAssignmentState} />}
         </div>
         < Assignments />
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
+      <TabPanel value={value} index={2} style={{width:'100%', textAlign: 'center'}}>
+        <div>
+          {decode.userType === 'faculty' && <Button style={{margin: '1rem'}} onClick={newQuizHandler} variant="contained">Create a New Quiz</Button>}
+          <ExistingQuizes />
+        </div>
       </TabPanel>
     </Box>
   );
