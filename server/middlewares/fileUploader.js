@@ -44,6 +44,7 @@ exports.upload = (req, res) => {
 
     db.query(query, (err, response) => {
         if (err) {
+            // console.log(err);
             if (err.code === 'ER_DUP_ENTRY') {
                 res.send('duplicate');
             } else {

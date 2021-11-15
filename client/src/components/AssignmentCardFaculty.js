@@ -9,20 +9,33 @@ import download from 'downloadjs';
 const AssignmentCardFaculty = ({ rollno, marksObtainedDB, maxMarks, courseID, assignmentID }) => {
 
     const [marksObtained, setMarksObtained] = useState(marksObtainedDB);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const marksObtainedHandler = (e) => {
         setMarksObtained(e.target.value);
     }
 
     const saveMarksHandler = () => {
+        const data = {
+            token: localStorage.getItem('token'),
+            assignmentid: assignmentID,
+            studentid: rollno,
+            marks: marksObtained
+        }
 
+        axios.post('http://localhost:3001/api/save/assignmentMarks', data)
+        .then(response => {
+            setErrorMessage(response.data);
+        })
+        .catch(err => console.log('error'));
     }
     
     const fileDownloadHandler = (e) => {
         const data = {
             token: localStorage.getItem('token'),
             rollno: rollno,
-            assignmentid: assignmentID
+            assignmentid: assignmentID,
+            marks: marksObtained
         }
         // console.log(data);
         axios.post('http://localhost:3001/api/assignmentFileDownloader', data)
@@ -51,7 +64,8 @@ const AssignmentCardFaculty = ({ rollno, marksObtainedDB, maxMarks, courseID, as
                         <span style={{ fontSize: '1.5rem' }}> out of {maxMarks}</span>
                     </div>
 
-                    <Button variant="contained" onClick={saveMarksHandler} >Save</Button>
+                    <Button style={{marginRight: '0.5rem'}} variant="contained" onClick={saveMarksHandler} >Save</Button>
+                    {errorMessage}
                 </div>
 
             </div>

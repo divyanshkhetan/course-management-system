@@ -28,6 +28,7 @@ const viewQuiz = require('../controllers/viewQuiz');
 const saveCandidateAnswers = require('../controllers/saveCandidateAnswers');
 const calculateResult = require('../controllers/calculateResult');
 const attemptDetails = require('../controllers/attemptDetails');
+const setAssignmentMarks = require('../controllers/setAssignmentMarks');
 
 // Routes
 router.post('/api/signup', signup);
@@ -55,5 +56,6 @@ router.post('/api/viewQuiz', auth, viewQuiz);
 router.post('/api/save/quiz/candidateAnswer', auth, saveCandidateAnswers);
 router.post('/api/calculateResult', auth, calculateResult);
 router.post('/api/details/attempt', auth, attemptDetails);
+router.post('/api/save/assignmentMarks', auth, setAssignmentMarks);
 
 module.exports = router;

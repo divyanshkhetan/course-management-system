@@ -78,6 +78,7 @@ const AssignmentPage = () => {
 
         axios.post(url, formData, config)
             .then(response => {
+                console.log(response);
                 if (response.data === 'success') {
                     setErrorMessage("Successfully uploaded");
                 } else if (response.data === 'duplicate') {

@@ -8,7 +8,7 @@ const attemptDetails = (req, res) => {
     const userType = decoded.userType;
     const quiz_id = req.body.quiz_id;
 
-    let query = `SELECT questions.*, opted_option FROM questions, candidate_answers WHERE questions.quiz_id = candidate_answers.quiz_id AND questions.ques_id = candidate_answers.ques_id AND student_id='${rollno}'`
+    let query = `SELECT questions.*, opted_option FROM questions, candidate_answers WHERE questions.quiz_id = candidate_answers.quiz_id AND questions.ques_id = candidate_answers.ques_id AND student_id='${rollno}' AND questions.quiz_id='${quiz_id}'`;
     db.query(query, (err, result) => {
         if(err){
             console.log(err);

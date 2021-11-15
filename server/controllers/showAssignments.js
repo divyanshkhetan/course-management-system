@@ -23,7 +23,7 @@ const showAssignments = (req, res) => {
         if(assignmentid === 'null'){
             query = `SELECT * from assignments WHERE course_id IN (SELECT course_id FROM course_students WHERE student_id='${rollno}')`;     
         } else {
-            query = `SELECT assignments.*, (SELECT marks_obtained from assignment_files WHERE assignment_files.student_id='${rollno}' AND assignment_id='${assignmentid}') from assignments WHERE assignments.assignment_id='${assignmentid}';`;     
+            query = `SELECT assignments.*, (SELECT marks_obtained FROM assignment_files WHERE assignment_id='${assignmentid}' AND student_id='${rollno}') AS marks_obtained from assignments WHERE assignments.assignment_id='${assignmentid}';`;     
         }        
     } else {
         if(assignmentid === 'null'){
