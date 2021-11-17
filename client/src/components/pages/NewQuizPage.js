@@ -75,6 +75,7 @@ const NewQuizPage = () => {
                 <span style={{ fontSize: '1.5rem', margin: '1rem' }} > {errorMessage} </span>
                 {questionState && 
                     <div style={{border: '1px solid #333', borderRadius: '10px'}}>
+                        <div> Please Ask a Minimum of Two Questions! </div>
                         <QuizQuestionCard questionCount="1" quiz_id={quiz_id} />
                         <QuizQuestionCard questionCount="2" quiz_id={quiz_id} />
                         <QuizQuestionCard questionCount="3" quiz_id={quiz_id} />

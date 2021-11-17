@@ -31,7 +31,7 @@ const NavBar = () => {
 
     const localToken = localStorage.getItem('token');
 
-    if(localToken === null){
+    if(localToken === 'null'){
         history.push('/');
     }
     
