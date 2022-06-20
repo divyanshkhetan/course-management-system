@@ -38,10 +38,12 @@ const AssignmentCardFaculty = ({ rollno, marksObtainedDB, maxMarks, courseID, as
             marks: marksObtained
         }
         // console.log(data);
-        axios.post('http://localhost:3001/api/assignmentFileDownloader', data)
+        axios.post('http://localhost:3001/api/assignmentFileDownloader', data, {responseType: 'arraybuffer'})
         .then(response => {
-            console.log(response);
-            download(response, "assignment.pdf", "application/pdf");
+            // console.log(response);
+            const blob = new Blob([response.data], {type: 'application/pdf'});
+            download(blob, `${assignmentID} - ${rollno}.pdf`, 'application/pdf');
+            
         })
         .catch(err => {
             console.log(err);
