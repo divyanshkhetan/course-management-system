@@ -28,6 +28,7 @@ const login = async(req, res, next) => {            // Tested - Working
                 const profile = result[0];
                 const fname = profile.first_name;
                 bcrypt.compare(password, profile.password, (err, response) => {
+                    console.log(response);
                     if(err){
                         res.send('error');              // unexpected error occured
                     } else {

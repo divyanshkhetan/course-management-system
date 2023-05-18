@@ -55,6 +55,7 @@ const Login = () => {
             } else if(result.data === 'invalid'){
                 setErrorMessage('User Not Found!');
             } else {
+                console.log(result);
                 setErrorMessage('Unexpected Error Occured. Contact the administrator or try again in a few moments!');
             }
         })
